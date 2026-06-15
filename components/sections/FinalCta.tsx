@@ -1,0 +1,59 @@
+import Reveal from "@/components/ui/Reveal";
+import CircleArrow from "@/components/ui/CircleArrow";
+import { finalCta, cta } from "@/lib/site";
+import { accent } from "@/lib/theme";
+
+export default function FinalCta() {
+  return (
+    <section className="relative bg-white py-12 sm:py-16">
+      <Reveal className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div
+          className="relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-12 sm:py-12"
+          style={{
+            background:
+              "linear-gradient(100deg, #f04e6e 0%, #f25e5e 42%, #f7984a 100%)",
+          }}
+        >
+          {/* ハーフトーンの点（右上） */}
+          <div
+            className="pointer-events-none absolute right-0 top-0 h-40 w-40 opacity-25"
+            style={{
+              backgroundImage:
+                "radial-gradient(rgba(255,255,255,0.9) 1.4px, transparent 1.4px)",
+              backgroundSize: "12px 12px",
+            }}
+          />
+
+          <div className="relative flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
+            {/* 左: テキスト＋ボタン */}
+            <div className="w-full max-w-xl text-center lg:text-left">
+              <p className="text-sm font-medium text-white/95 sm:text-base">
+                {finalCta.lead}
+              </p>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                {finalCta.title}
+              </h2>
+
+              <a
+                href={cta.contactHref}
+                className="group mt-7 flex w-full items-center justify-center gap-4 rounded-full bg-white py-4 pl-6 pr-3 text-base font-bold shadow-lg transition-all hover:-translate-y-0.5 sm:max-w-md"
+                style={{ color: accent.coral }}
+              >
+                <span className="flex-1 text-center">{cta.contactLabel}</span>
+                <CircleArrow />
+              </a>
+            </div>
+
+            {/* 右: ビジネスパーソンのイラスト（素材プレースホルダ） */}
+            <div className="grid h-40 w-full max-w-xs place-items-center rounded-2xl border border-dashed border-white/50 bg-white/15 backdrop-blur-[1px] lg:h-44">
+              <div className="text-center text-white/80">
+                <div className="mx-auto mb-2 h-12 w-12 rounded-full bg-white/30" />
+                <p className="text-xs font-medium">人物イラスト（素材）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
