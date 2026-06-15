@@ -82,7 +82,7 @@ export default function Header() {
               onClick={() => setOpen(false)}
             />
             <motion.nav
-              className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col bg-cream-50 p-6 shadow-xl"
+              className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col bg-white p-6 shadow-xl"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
