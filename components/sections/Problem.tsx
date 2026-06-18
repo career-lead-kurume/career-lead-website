@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import Reveal from "@/components/ui/Reveal";
 import { problem } from "@/lib/site";
@@ -45,14 +46,22 @@ export default function Problem() {
           {problem.items.map((item, i) => (
             <Reveal key={item.title} delay={(i % 2) * 0.08}>
               <figure className="group">
-                {/* 画像（素材を /public/images/problem/0X.jpg に配置して
-                    next/image へ差し替え想定） */}
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 via-cream-200 to-sky-100">
-                  <div className="absolute inset-0 grid place-items-center text-brand-400/70 transition-transform duration-500 group-hover:scale-[1.04]">
-                    <span className="text-xs font-medium tracking-wide">
-                      画像（{String(i + 1).padStart(2, "0")}）
-                    </span>
-                  </div>
+                  {i < 3 ? (
+                    <Image
+                      src={`/images/problem/${String(i + 1).padStart(2, "0")}.jpg`}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 grid place-items-center text-brand-400/70 transition-transform duration-500 group-hover:scale-[1.04]">
+                      <span className="text-xs font-medium tracking-wide">
+                        画像（{String(i + 1).padStart(2, "0")}）
+                      </span>
+                    </div>
+                  )}
                   {/* 連番バッジ */}
                   <span className="absolute left-4 top-4 font-mono text-sm font-semibold tabular-nums text-white/90 drop-shadow">
                     {String(i + 1).padStart(2, "0")}

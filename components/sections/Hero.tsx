@@ -69,7 +69,7 @@ export default function Hero() {
             className="flex items-center gap-2.5"
           >
             <SlashMarks />
-            <span className="text-sm font-bold tracking-wide text-neutral-600 sm:text-base">
+            <span className="text-lg font-bold tracking-wide text-neutral-600 sm:text-xl">
               {hero.eyebrow}
             </span>
             <SlashMarks flip />

@@ -23,7 +23,7 @@ export const navItems = [
   { label: "私たちの想い", href: "#affinity" },
   { label: "サービス", href: "#offer" },
   { label: "ご利用の流れ", href: "#solution" },
-  { label: "実績", href: "#achievements" },
+  { label: "対応業種", href: "#coverage" },
   { label: "お客様の声", href: "#testimonials" },
   { label: "よくある質問", href: "#faq" },
 ] as const;
@@ -39,7 +39,7 @@ export const cta = {
 
 /** ヒーロー */
 export const hero = {
-  eyebrow: "人手不足の解決に、確かな一手を。",
+  eyebrow: "人手不足の解決に、確かな一手を",
   // タイトルはセグメント配列。accent で強調色（coral=赤／blue=青）を指定。
   // break=true でその語の後に改行。
   titleSegments: [
@@ -81,7 +81,7 @@ export const problem = {
   description: "人手不足は、現場の「あたりまえ」を少しずつ削っていきます。",
   items: [
     {
-      title: "募集しても応募が来ない",
+      title: "人材不足",
       body: "求人を出しても反応が乏しく、現場の負担だけが増え続けている。",
     },
     {
@@ -191,48 +191,30 @@ export const offer = {
   ],
 };
 
-/** Achievements（実績・社会的証明）— 紺〜青の実績バンド */
-export const achievements = {
-  eyebrow: "Track Record",
-  title: "キャリア・リードの実績",
+/** Coverage（対応業種・ご紹介可能国） */
+export const coverage = {
+  eyebrow: "Coverage",
+  title: "対応業種とご紹介可能国",
   description:
-    "多くの企業と人材をつないできました。実績は、信頼の積み重ねです。（数値はすべて仮）",
-  // カウントアップ指標（value は数値、suffix は単位、note は補足）
-  stats: [
-    { value: 3000, suffix: "名以上", label: "累計支援実績", note: "（2024年4月時点）" },
-    { value: 1200, suffix: "社以上", label: "取引企業数", note: "（全国対応）" },
-    { value: 96, suffix: "%", label: "定着率", note: "（自社調べ）" },
-    { value: 15, suffix: "カ国以上", label: "対応国数", note: "（アジア中心）" },
+    "幅広い分野で、各国の意欲ある人材をご紹介します。",
+  // 対応業種（field=特定技能の分野名 / example=現場でイメージしやすい呼称 / icon=Coverage.tsx で対応）
+  industriesTitle: "対応業種",
+  industries: [
+    { field: "介護分野", example: "介護", icon: "care" },
+    { field: "自動車運送業分野", example: "トラック・物流", icon: "truck" },
+    { field: "工業製品製造業分野", example: "製造", icon: "factory" },
+    { field: "飲食料品製造業分野", example: "食品", icon: "food" },
+    { field: "建設分野", example: "建築", icon: "construction" },
   ],
-  // 導入企業ロゴバンド（interactive deck p21 LogoBand の流用）。
-  // 確定後は社名テキストを実ロゴ画像（/public/images）に差し替え。
-  trustedEyebrow: "Trusted by",
-  trustedTitle: "多くの企業に選ばれています",
-  companyRows: [
-    [
-      "◇ 株式会社A",
-      "△ B介護サービス",
-      "◆ C フーズ",
-      "○ Dホテルズ",
-      "◎ E製作所",
-      "⬡ Fファーム",
-    ],
-    [
-      "◉ Gケアグループ",
-      "✦ H外食チェーン",
-      "⌖ I食品工業",
-      "◐ Jビルサービス",
-      "⊛ Kリゾート",
-      "✿ L農園",
-    ],
-    [
-      "◇ M商事",
-      "✕ N福祉会",
-      "◈ Oレストラン",
-      "✻ P製菓",
-      "⊕ Qクリーニング",
-      "◊ R建設",
-    ],
+  // ご紹介可能国
+  countriesTitle: "ご紹介可能国",
+  countries: [
+    "インドネシア",
+    "スリランカ",
+    "パキスタン",
+    "タイ",
+    "インド",
+    "インドネシア",
   ],
 };
 
