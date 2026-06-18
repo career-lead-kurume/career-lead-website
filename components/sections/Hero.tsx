@@ -8,6 +8,7 @@ import {
   HandThumbUpIcon,
 } from "@heroicons/react/24/outline";
 import CircleArrow from "@/components/ui/CircleArrow";
+import ImageMarquee from "@/components/ui/ImageMarquee";
 import { hero, cta } from "@/lib/site";
 import { accent } from "@/lib/theme";
 
@@ -42,7 +43,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-white pt-20"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden bg-white pt-20"
     >
       {/* 背景: 淡い縦ストライプの紙テクスチャ */}
       <div
@@ -58,7 +59,21 @@ export default function Hero() {
         <div className="absolute bottom-10 left-1/4 h-64 w-64 animate-blob bg-sky-100/50 blur-3xl [animation-delay:-6s]" />
       </div>
 
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-6">
+      {/* ===== 上部マーキー ===== */}
+      <ImageMarquee
+        images={[
+          { src: "/images/marquee/01.jpg", alt: "現場写真 1" },
+          { src: "/images/marquee/02.jpg", alt: "現場写真 2" },
+          { src: "/images/marquee/03.jpg", alt: "現場写真 3" },
+          { src: "/images/marquee/04.jpg", alt: "現場写真 4" },
+          { src: "/images/marquee/05.jpg", alt: "現場写真 5" },
+          { src: "/images/marquee/06.jpg", alt: "現場写真 6" },
+        ]}
+        durationS={35}
+        fadeColor="#ffffff"
+      />
+
+      <div className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-6">
         {/* ===== 左: コピー ===== */}
         <div>
           {/* eyebrow */}

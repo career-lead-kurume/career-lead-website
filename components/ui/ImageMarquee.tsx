@@ -1,12 +1,10 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 /**
  * 画像が右から左へ無限に流れるマーキー。
  * ヒーローセクションとProblemの境界に配置し、現場・人材の雰囲気を伝える。
  *
- * - 画像は後から /public/images に差し替え可能（現在はダミー）
+ * - framer-motion を使わず CSS @keyframes で実装。
+ *   JS管理のアニメーションはサイクル境界でスナップが発生するため、
+ *   ブラウザGPUレベルでループする CSS animation: linear infinite を使用。
  * - -50% まで動かして無限ループに見せるため、同じ配列を2回連結
  * - 両端は背景色へフェード
  */
@@ -16,7 +14,6 @@ type MarqueeImage = {
 };
 
 function Placeholder({ alt, index }: { alt: string; index: number }) {
-  // ダミー用の淡いグラデーション（ブランドカラー基調で交互に変化）
   const gradients = [
     "linear-gradient(135deg, #fce7f0 0%, #f7a8c8 100%)",
     "linear-gradient(135deg, #ffe8df 0%, #ff8a65 100%)",
@@ -48,6 +45,14 @@ export default function ImageMarquee({
 
   return (
     <div className="relative w-full overflow-hidden bg-white py-6">
+      {/* CSS keyframe をインラインで定義（tailwind の purge に依存しない確実な方法） */}
+      <style>{`
+        @keyframes img-marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+
       {/* 両端フェード */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-32"
@@ -62,10 +67,14 @@ export default function ImageMarquee({
         }}
       />
 
-      <motion.div
+      <div
         className="flex gap-4 sm:gap-6"
-        animate={{ x: direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"] }}
-        transition={{ duration: durationS, repeat: Infinity, ease: "linear" }}
+        style={{
+          animation: `img-marquee ${durationS}s linear infinite`,
+          /* right方向は同じキーフレームを逆再生 */
+          animationDirection: direction === "right" ? "reverse" : "normal",
+          willChange: "transform",
+        }}
       >
         {doubled.map((img, i) => (
           <div
@@ -84,7 +93,7 @@ export default function ImageMarquee({
             )}
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
