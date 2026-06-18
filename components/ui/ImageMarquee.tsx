@@ -6,6 +6,10 @@
  *   JS管理のアニメーションはサイクル境界でスナップが発生するため、
  *   ブラウザGPUレベルでループする CSS animation: linear infinite を使用。
  * - -50% まで動かして無限ループに見せるため、同じ配列を2回連結
+ * - 余白は flex の gap ではなく各アイテムの右マージンで付与する。
+ *   gap は「最後のアイテムの後ろ」に入らないため、-50% が 1コピー分の幅と
+ *   一致せず、ループ境界でギャップ半分だけズレ（＝初期位置に戻る違和感）が
+ *   発生する。右マージンなら全幅の半分が正確に 1コピー分になり継ぎ目が消える。
  * - 両端は背景色へフェード
  */
 type MarqueeImage = {
@@ -68,7 +72,7 @@ export default function ImageMarquee({
       />
 
       <div
-        className="flex gap-4 sm:gap-6"
+        className="flex w-max"
         style={{
           animation: `img-marquee ${durationS}s linear infinite`,
           /* right方向は同じキーフレームを逆再生 */
@@ -79,7 +83,7 @@ export default function ImageMarquee({
         {doubled.map((img, i) => (
           <div
             key={i}
-            className="relative h-40 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-48 sm:w-80"
+            className="relative mr-4 h-40 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:mr-6 sm:h-48 sm:w-80"
           >
             {img.src ? (
               // eslint-disable-next-line @next/next/no-img-element

@@ -4,10 +4,10 @@ import {
   Cog6ToothIcon,
   BuildingStorefrontIcon,
   HomeModernIcon,
-  GlobeAsiaAustraliaIcon,
 } from "@heroicons/react/24/solid";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import CountryMap from "@/components/ui/CountryMap";
 import { coverage } from "@/lib/site";
 
 /** 分野アイコンの対応づけ（site.ts の icon キーと連動） */
@@ -61,24 +61,12 @@ export default function Coverage() {
           </div>
         </Reveal>
 
-        {/* ===== ご紹介可能国 ===== */}
+        {/* ===== ご紹介可能国（地図＋ピン） ===== */}
         <Reveal className="mt-16">
           <h3 className="mb-6 text-center text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl">
             {coverage.countriesTitle}
           </h3>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {coverage.countries.map((name, i) => (
-              <div
-                key={`${name}-${i}`}
-                className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white px-5 py-2.5 shadow-sm"
-              >
-                <GlobeAsiaAustraliaIcon className="h-5 w-5 text-brand-500" />
-                <span className="text-sm font-semibold tracking-wide text-neutral-700 sm:text-base">
-                  {name}
-                </span>
-              </div>
-            ))}
-          </div>
+          <CountryMap countries={coverage.countries} />
         </Reveal>
       </div>
     </section>
