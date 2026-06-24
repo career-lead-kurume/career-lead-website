@@ -135,19 +135,12 @@
     }
   }
 
-  /* 各国 → 日本のアーク（点線はゆったり・落ち着いた印象） */
+  /* 各国 → 日本のアーク（実線・落ち着いた印象） */
   .ssw-arc {
     stroke-linecap: round;
-    stroke-dasharray: 2 16;
-    animation: ssw-arc-flow 3.4s linear infinite;
   }
   .ssw-arc-glow {
     filter: blur(2.5px);
-  }
-  @keyframes ssw-arc-flow {
-    to {
-      stroke-dashoffset: -36;
-    }
   }
 
   /* Leaflet UI をブランドに馴染ませる */

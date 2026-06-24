@@ -12,7 +12,8 @@ import { telHref } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "お問い合わせ",
   description:
-    "特定技能人材の採用に関するご相談・お見積りは無料です。お気軽にお問い合わせください。",
+    "特定技能外国人の採用・定着に関するご相談・お見積りは無料です。登録支援機関のキャリア・リードが、現場のお悩みからワンストップでサポートします。お気軽にお問い合わせください。",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

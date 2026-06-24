@@ -1,7 +1,11 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { contact as contactContent } from "@/lib/site";
+import { getResendEnv } from "@/lib/env";
+import { rateLimit } from "@/lib/rateLimit";
+import { isValidEmail } from "@/lib/utils";
 
 export type ContactState = {
   status: "idle" | "success" | "error";
@@ -11,6 +15,14 @@ export type ContactState = {
 const categoryLabel = (value: string) =>
   contactContent.categories.find((c) => c.value === value)?.label ?? value;
 
+/** リクエストヘッダからクライアントIPを推定する（プロキシ経由を考慮）。 */
+async function getClientIp(): Promise<string> {
+  const h = await headers();
+  const forwarded = h.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0]?.trim() || "unknown";
+  return h.get("x-real-ip")?.trim() || "unknown";
+}
+
 export async function submitContact(
   _prev: ContactState,
   formData: FormData
@@ -19,6 +31,17 @@ export async function submitContact(
   const honeypot = (formData.get("website") as string | null)?.trim() ?? "";
   if (honeypot !== "") {
     return { status: "success" }; // 攻撃側に気づかれないよう成功扱い
+  }
+
+  // レート制限（IP単位）: スパム連投・Resend コスト枯渇の一次防御。
+  const ip = await getClientIp();
+  const limit = rateLimit(`contact:${ip}`);
+  if (!limit.ok) {
+    return {
+      status: "error",
+      message:
+        "送信リクエストが多すぎます。しばらく時間をおいてから再度お試しください。",
+    };
   }
 
   // 改行除去でヘッダインジェクション防止
@@ -57,8 +80,7 @@ export async function submitContact(
     };
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
+  if (!isValidEmail(email)) {
     return {
       status: "error",
       message: "メールアドレスの形式をご確認ください。",
@@ -83,13 +105,11 @@ export async function submitContact(
     .filter(Boolean)
     .join("\n");
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_EMAIL;
-  const from = process.env.CONTACT_FROM;
+  const env = getResendEnv();
 
   // 開発フォールバック: キー未設定ならメール送信せずコンソール出力のみ。
   // クライアント確定前でもフォームの動作確認ができる。
-  if (!apiKey || !to || !from) {
+  if (!env) {
     console.info(
       "[contact] Resend 未設定のため送信スキップ（dev フォールバック）\n" +
         bodyLines
@@ -102,10 +122,10 @@ export async function submitContact(
   }
 
   try {
-    const resend = new Resend(apiKey);
+    const resend = new Resend(env.apiKey);
     const result = await resend.emails.send({
-      from,
-      to: [to],
+      from: env.from,
+      to: [env.to],
       replyTo: email,
       subject: `【${label}】${name} 様からのお問い合わせ`,
       text: bodyLines,

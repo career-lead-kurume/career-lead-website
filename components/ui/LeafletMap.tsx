@@ -20,6 +20,15 @@ export type MapPin = {
 const JAPAN: [number, number] = [35.6762, 139.6503];
 
 /**
+ * fitBounds の余白(px)。[x, y] = [左右, 上下]。
+ * ラベルは点の上＆左右へ伸びるため、特に上を広めに確保。
+ */
+const FIT_PADDING = {
+  paddingTopLeft: [56, 64] as [number, number],
+  paddingBottomRight: [56, 36] as [number, number],
+};
+
+/**
  * コンテナサイズに合わせて範囲を再フィットする。
  * - リサイズ時にも invalidateSize + fitBounds で再計算（スマホでの見切れ対策）
  * - ピン上のラベルが切れないよう、余白（特に上）を広めに確保
@@ -32,11 +41,7 @@ function FitBounds({ points }: { points: [number, number][] }) {
     const bounds = L.latLngBounds(points);
     const fit = () => {
       map.invalidateSize();
-      map.fitBounds(bounds, {
-        // [x, y] = [左右, 上下] の余白(px)。ラベルは点の上＆左右へ伸びるため広めに。
-        paddingTopLeft: [56, 64],
-        paddingBottomRight: [56, 36],
-      });
+      map.fitBounds(bounds, FIT_PADDING);
     };
     fit();
     window.addEventListener("resize", fit);
@@ -52,14 +57,30 @@ function FitBounds({ points }: { points: [number, number][] }) {
   return null;
 }
 
-/** 国ピン（ネオン調ドット＋パルス＋グラスラベル）。CSSは globals.css の .ssw-pin* */
+/** HTML特殊文字をエスケープ（divIcon の html 補間でのXSS対策）。 */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/**
+ * 国ピン（ネオン調ドット＋パルス＋グラスラベル）。CSSは globals.css の .ssw-pin*
+ *
+ * 注意: `name` は L.divIcon の html へ補間されるため、必ず escapeHtml を通すこと。
+ * 現状は coverage.countries（静的・開発者管理）だが、将来ユーザー入力やCMS由来の
+ * 値を渡す場合でも XSS にならないようエスケープ前提にしている。
+ */
 function createPinIcon(name: string, variant: "origin" | "dest" = "origin") {
   return L.divIcon({
     className: "ssw-pin-icon",
     html: `
       <span class="ssw-pin__pulse ssw-pin__pulse--${variant}"></span>
       <span class="ssw-pin__dot ssw-pin__dot--${variant}"></span>
-      <span class="ssw-pin__label ssw-pin__label--${variant}">${name}</span>
+      <span class="ssw-pin__label ssw-pin__label--${variant}">${escapeHtml(name)}</span>
     `,
     iconSize: [0, 0],
     iconAnchor: [0, 0],
@@ -101,7 +122,7 @@ export default function LeafletMap({ pins }: { pins: MapPin[] }) {
   return (
     <MapContainer
       bounds={bounds}
-      boundsOptions={{ paddingTopLeft: [56, 64], paddingBottomRight: [56, 36] }}
+      boundsOptions={FIT_PADDING}
       scrollWheelZoom={false}
       zoomControl={false}
       attributionControl
@@ -120,7 +141,7 @@ export default function LeafletMap({ pins }: { pins: MapPin[] }) {
         maxZoom={19}
       />
 
-      {/* 各国 → 日本 のアーク（やわらかいグロー下地＋ゆったり流れる点線） */}
+      {/* 各国 → 日本 のアーク（やわらかいグロー下地＋実線） */}
       {pins.map((p) => {
         const arc = buildArc(p.coord, JAPAN);
         return (

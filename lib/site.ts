@@ -14,6 +14,14 @@ export const site = {
   telHours: "受付時間 平日 9:00〜18:00",
   email: "info@example.com",
   address: "〒830-0003 福岡県久留米市東櫛原町2303-16",
+  // 構造化データ（JSON-LD）や表示で再利用する住所パーツ。
+  // address 文字列とずれないよう、変更時は両方を更新すること。
+  addressParts: {
+    postalCode: "830-0003",
+    region: "福岡県",
+    locality: "久留米市",
+    street: "東櫛原町2303-16",
+  },
   officeName: "本社・久留米オフィス",
 } as const;
 
@@ -31,9 +39,6 @@ export const navItems = [
 export const cta = {
   contactHref: "/contact",
   contactLabel: "無料で相談する",
-  // 資料DL（PDF確定後にパスを差し替え。未設定時は /contact へ）
-  documentHref: "/contact",
-  documentLabel: "サービス資料をダウンロード",
 } as const;
 
 /** ヒーロー */
@@ -51,27 +56,9 @@ export const hero = {
   ] as { text: string; accent?: "coral" | "blue"; break?: boolean }[],
   description:
     "キャリア・リードは、特定技能人材の採用から入社後のサポートまでワンストップで支援するサービスです。安心・確実・スピーディーに、貴社の人材課題を解決します。",
-  // トラスト指標（インラインバッジ）。icon は Hero.tsx でアイコンに対応づけ。
-  trust: [
-    { icon: "shield", label: "登録支援機関", value: "登録済み" },
-    { icon: "users", label: "採用支援実績", value: "3,000名以上" },
-    { icon: "like", label: "定着率", value: "96%" },
-  ],
   // 手書き風アクセント（右ビジュアル上）
   handwrite: "優秀な人材が、\n日本の未来を\nつくる。",
 };
-
-/** ロゴマーキー（対応業種。仮） */
-export const marquee = [
-  "介護",
-  "外食業",
-  "宿泊業",
-  "建設業",
-  "食品製造",
-  "ビルクリーニング",
-  "農業",
-  "製造業",
-];
 
 /** 問題提起（Problem） */
 export const problem = {
@@ -189,7 +176,6 @@ export const coverage = {
     "タイ",
     "ネパール",
     "インド",
-    "インドネシア",
   ],
 };
 
@@ -218,8 +204,6 @@ export const testimonials = {
       company: "株式会社C様",
     },
   ],
-  moreLabel: "もっと見る",
-  moreHref: "#",
 };
 
 /** Narrowing down（こんな企業様へ・絞り込み） */
@@ -281,10 +265,6 @@ export const faq = {
       a: "ご依頼内容や採用人数により異なります。料金体系は明朗にご案内しておりますので、お見積りをお気軽にご相談ください。",
     },
   ],
-  // 右側の相談ボックス
-  contactBox: {
-    title: "その他ご不明な点は\nお気軽にご相談ください！",
-  },
 };
 
 /** 最終CTAバナー */
