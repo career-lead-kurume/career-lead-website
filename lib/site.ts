@@ -28,8 +28,8 @@ export const site = {
 /** ヘッダー／フッターのナビゲーション。href はページ内アンカー。 */
 export const navItems = [
   { label: "私たちの想い", href: "#affinity" },
-  { label: "サービス", href: "#offer" },
   { label: "導入の流れ", href: "#solution" },
+  { label: "サービス", href: "#offer" },
   { label: "対応業種・紹介可能国", href: "#coverage" },
   { label: "お客様の声", href: "#testimonials" },
   { label: "よくある質問", href: "#faq" },
