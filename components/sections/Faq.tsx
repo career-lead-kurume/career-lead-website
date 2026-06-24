@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { PlusIcon, PhoneIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/solid";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import { faq, cta, site } from "@/lib/site";
-import { telHref } from "@/lib/utils";
+import { faq } from "@/lib/site";
 
 export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -16,7 +15,7 @@ export default function Faq() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading eyebrow={faq.eyebrow} title={faq.title} />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
+        <div className="mx-auto mt-14 max-w-3xl">
           {/* アコーディオン */}
           <Reveal>
             <ul className="overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-sm">
@@ -72,34 +71,6 @@ export default function Faq() {
                 );
               })}
             </ul>
-          </Reveal>
-
-          {/* 相談ボックス */}
-          <Reveal delay={0.1}>
-            <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-600 to-accent-500 p-7 text-white shadow-lg sm:p-8">
-              <h3 className="whitespace-pre-line text-lg font-bold leading-snug sm:text-xl">
-                {faq.contactBox.title}
-              </h3>
-
-              <a
-                href={cta.contactHref}
-                className="group mt-6 flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-base font-bold text-brand-600 shadow-md transition-all hover:-translate-y-0.5"
-              >
-                {cta.contactLabel}
-                <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-
-              <div className="mt-6 border-t border-white/20 pt-5 text-center">
-                <a
-                  href={telHref(site.tel)}
-                  className="inline-flex items-center gap-2 text-2xl font-bold tracking-wide"
-                >
-                  <PhoneIcon className="h-6 w-6" />
-                  {site.tel}
-                </a>
-                <p className="mt-1 text-xs text-white/80">{site.telHours}</p>
-              </div>
-            </div>
           </Reveal>
         </div>
       </div>

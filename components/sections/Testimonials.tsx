@@ -48,14 +48,6 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <Reveal delay={0.1} className="mt-10 text-center">
-          <a
-            href={testimonials.moreHref}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-7 py-3 text-sm font-semibold text-brand-700 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-brand-50"
-          >
-            {testimonials.moreLabel}
-          </a>
-        </Reveal>
       </div>
     </section>
   );

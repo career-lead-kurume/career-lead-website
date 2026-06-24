@@ -78,11 +78,12 @@ export default function Header() {
             exit={{ opacity: 0 }}
           >
             <div
-              className="absolute inset-0 bg-neutral-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm"
               onClick={() => setOpen(false)}
             />
             <motion.nav
-              className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col bg-white p-6 shadow-xl"
+              style={{ backgroundColor: "#ffffff" }}
+              className="absolute right-0 top-0 flex h-full w-72 max-w-[80%] flex-col p-6 shadow-2xl"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}

@@ -32,7 +32,7 @@ export default function SectionHeading({
         </span>
       )}
       <h2
-        className={`text-2xl font-bold leading-tight sm:text-3xl ${
+        className={`whitespace-pre-line text-2xl font-bold leading-tight sm:text-3xl ${
           invert ? "text-white" : "text-neutral-900"
         }`}
       >

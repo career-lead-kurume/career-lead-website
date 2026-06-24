@@ -119,6 +119,14 @@
     color: #8a6a12;
     border-color: #fbe4ac;
   }
+  /* スマホではラベルを小さくして見切れ・重なりを抑える */
+  @media (max-width: 640px) {
+    .ssw-pin__label {
+      font-size: 11px;
+      padding: 3px 8px;
+      bottom: 13px;
+    }
+  }
   @keyframes ssw-ping {
     75%,
     100% {

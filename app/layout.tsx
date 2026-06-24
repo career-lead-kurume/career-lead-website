@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" className={notoSansJp.variable}>
+    <html lang="ja" className={notoSansJp.variable} suppressHydrationWarning>
       <body className="min-h-screen font-sans">
         <LenisProvider>
           <div className="relative">

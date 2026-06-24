@@ -1,3 +1,4 @@
+import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import WaveDivider from "@/components/ui/WaveDivider";
@@ -22,15 +23,16 @@ export default function Affinity() {
       </div>
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
-        {/* ビジュアル（仮） */}
+        {/* ビジュアル（代表者写真） */}
         <Reveal direction="right">
-          <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-[2.5rem] border border-white/20 bg-white/10 backdrop-blur">
-            <div className="absolute inset-0 grid place-items-center text-center text-white/70">
-              <div>
-                <div className="mx-auto mb-3 h-14 w-14 animate-float rounded-full bg-white/20" />
-                <p className="text-sm">写真（仮）</p>
-              </div>
-            </div>
+          <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-[2.5rem] border border-white/20 shadow-2xl shadow-black/20 lg:mx-0">
+            <Image
+              src="/images/representative.jpg"
+              alt="株式会社キャリア・リード 代表取締役 佐藤有里子"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 420px"
+            />
           </div>
         </Reveal>
 
@@ -57,6 +59,14 @@ export default function Affinity() {
               {affinity.pullQuote}
             </blockquote>
           </Reveal>
+
+          {affinity.signature && (
+            <Reveal delay={0.4}>
+              <p className="mt-6 text-right text-sm font-medium text-white/70">
+                {affinity.signature}
+              </p>
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

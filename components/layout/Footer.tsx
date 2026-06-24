@@ -44,7 +44,6 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-white">お問い合わせ</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-neutral-400">
               <li>TEL: {site.tel}</li>
-              <li>FAX: {site.fax}</li>
               <li className="text-neutral-500">{site.telHours}</li>
               <li className="pt-1">
                 <span className="text-neutral-500">{site.officeName}</span>

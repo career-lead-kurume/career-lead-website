@@ -1,22 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
-import {
-  ShieldCheckIcon,
-  UserGroupIcon,
-  HandThumbUpIcon,
-} from "@heroicons/react/24/outline";
 import CircleArrow from "@/components/ui/CircleArrow";
 import ImageMarquee from "@/components/ui/ImageMarquee";
 import { hero, cta } from "@/lib/site";
 import { accent } from "@/lib/theme";
-
-const trustMeta = {
-  shield: { Icon: ShieldCheckIcon, color: accent.coral },
-  users: { Icon: UserGroupIcon, color: accent.coral },
-  like: { Icon: HandThumbUpIcon, color: accent.blue },
-} as const;
 
 /** 見出し両端の手書き風スラッシュ */
 function SlashMarks({ flip = false }: { flip?: boolean }) {
@@ -138,40 +126,6 @@ export default function Hero() {
               {cta.contactLabel}
               <CircleArrow bg="#ffffff" arrow={accent.coral} />
             </a>
-            <a
-              href={cta.documentHref}
-              className="group inline-flex items-center gap-2 border-b border-neutral-300 pb-1 text-sm font-semibold text-neutral-600 transition-colors hover:text-neutral-900"
-            >
-              {cta.documentLabel}
-              <ArrowDownTrayIcon className="h-4 w-4" style={{ color: accent.coral }} />
-            </a>
-          </motion.div>
-
-          {/* trust badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.75 }}
-            className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-5"
-          >
-            {hero.trust.map((t) => {
-              const meta = trustMeta[t.icon as keyof typeof trustMeta];
-              const Icon = meta.Icon;
-              return (
-                <div key={t.label} className="flex items-center gap-2.5">
-                  <Icon className="h-8 w-8" style={{ color: meta.color }} />
-                  <div className="leading-tight">
-                    <p className="text-[11px] text-neutral-500">{t.label}</p>
-                    <p
-                      className="text-base font-extrabold"
-                      style={{ color: meta.color }}
-                    >
-                      {t.value}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
           </motion.div>
         </div>
 

@@ -1,7 +1,9 @@
+import { PhoneIcon } from "@heroicons/react/24/solid";
 import Reveal from "@/components/ui/Reveal";
 import CircleArrow from "@/components/ui/CircleArrow";
-import { finalCta, cta } from "@/lib/site";
+import { finalCta, cta, site } from "@/lib/site";
 import { accent } from "@/lib/theme";
+import { telHref } from "@/lib/utils";
 
 export default function FinalCta() {
   return (
@@ -42,6 +44,18 @@ export default function FinalCta() {
                 <span className="flex-1 text-center">{cta.contactLabel}</span>
                 <CircleArrow />
               </a>
+
+              {/* 電話での相談 */}
+              <div className="mt-6 sm:max-w-md">
+                <a
+                  href={telHref(site.tel)}
+                  className="inline-flex items-center gap-2 text-3xl font-extrabold tracking-wide text-white"
+                >
+                  <PhoneIcon className="h-7 w-7" />
+                  {site.tel}
+                </a>
+                <p className="mt-1 text-xs text-white/90">{site.telHours}</p>
+              </div>
             </div>
 
             {/* 右: ビジネスパーソンのイラスト（素材プレースホルダ） */}

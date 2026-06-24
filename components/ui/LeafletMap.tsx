@@ -1,8 +1,14 @@
 "use client";
 
 import "leaflet/dist/leaflet.css";
-import { Fragment } from "react";
-import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
+import { Fragment, useEffect } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  useMap,
+} from "react-leaflet";
 import L from "leaflet";
 
 export type MapPin = {
@@ -12,6 +18,39 @@ export type MapPin = {
 
 /** 受け入れ先（日本）。各国からここへアークを伸ばす。 */
 const JAPAN: [number, number] = [35.6762, 139.6503];
+
+/**
+ * コンテナサイズに合わせて範囲を再フィットする。
+ * - リサイズ時にも invalidateSize + fitBounds で再計算（スマホでの見切れ対策）
+ * - ピン上のラベルが切れないよう、余白（特に上）を広めに確保
+ */
+function FitBounds({ points }: { points: [number, number][] }) {
+  const map = useMap();
+  const key = JSON.stringify(points);
+
+  useEffect(() => {
+    const bounds = L.latLngBounds(points);
+    const fit = () => {
+      map.invalidateSize();
+      map.fitBounds(bounds, {
+        // [x, y] = [左右, 上下] の余白(px)。ラベルは点の上＆左右へ伸びるため広めに。
+        paddingTopLeft: [56, 64],
+        paddingBottomRight: [56, 36],
+      });
+    };
+    fit();
+    window.addEventListener("resize", fit);
+    // フォント読み込み後のズレ対策に少し遅延でも一度フィット
+    const t = setTimeout(fit, 300);
+    return () => {
+      window.removeEventListener("resize", fit);
+      clearTimeout(t);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [map, key]);
+
+  return null;
+}
 
 /** 国ピン（ネオン調ドット＋パルス＋グラスラベル）。CSSは globals.css の .ssw-pin* */
 function createPinIcon(name: string, variant: "origin" | "dest" = "origin") {
@@ -56,12 +95,13 @@ function buildArc(
 }
 
 export default function LeafletMap({ pins }: { pins: MapPin[] }) {
-  const bounds = L.latLngBounds([...pins.map((p) => p.coord), JAPAN]);
+  const points: [number, number][] = [...pins.map((p) => p.coord), JAPAN];
+  const bounds = L.latLngBounds(points);
 
   return (
     <MapContainer
       bounds={bounds}
-      boundsOptions={{ padding: [55, 55] }}
+      boundsOptions={{ paddingTopLeft: [56, 64], paddingBottomRight: [56, 36] }}
       scrollWheelZoom={false}
       zoomControl={false}
       attributionControl
@@ -71,6 +111,7 @@ export default function LeafletMap({ pins }: { pins: MapPin[] }) {
       keyboard={false}
       style={{ height: "100%", width: "100%", background: "#eef3fb" }}
     >
+      <FitBounds points={points} />
       {/* CartoDB Positron（明るくミニマル / ラベルなし / APIキー不要） */}
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"

@@ -1,13 +1,13 @@
 # 画像素材の配置場所
 
-クライアント確定後の画像をここに置いてください。
+現在サイトで使用している画像の一覧です。
 
-推奨（仮）:
-- `hero.jpg` … ヒーローのメインビジュアル（人物写真など、縦長 4:5 目安）
-- `affinity.jpg` … 想いセクションの写真（正方形目安）
-- `logo.svg` … ロゴ（ヘッダー／フッター用）
-- `og.png` … OGP画像（1200×630）
+```
+images/
+├─ logoK.png            … ロゴ（ヘッダー / フッター）
+├─ representative.jpg   … 代表者写真（Our Story / Affinity セクション）
+├─ marquee/             … ヒーロー下の流れる画像（01.jpg〜06.jpg）
+└─ problem/             … 「採用の悩み」セクション（01.jpg〜03.jpg）
+```
 
-配置後、各セクションのプレースホルダ（グレーの枠）を `next/image` の
-`<Image>` に置き換えてください。対象: `components/sections/Hero.tsx`,
-`components/sections/Affinity.tsx`, `components/layout/Header.tsx`。
+差し替える場合は同じファイル名で上書きしてください。
