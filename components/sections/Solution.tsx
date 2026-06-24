@@ -47,20 +47,27 @@ export default function Solution() {
                       <Icon className="h-6 w-6 sm:h-7 sm:w-7" />
                     </span>
 
-                    {/* STEP番号 + タイトル + 補足 */}
-                    <p className="text-base sm:text-lg">
-                      <span className="mr-2.5 font-extrabold tracking-wide text-brand-700 sm:mr-3">
-                        STEP{i + 1}
-                      </span>
-                      <span className="font-bold text-neutral-800">
-                        {step.title}
-                      </span>
-                      {step.note && (
-                        <span className="text-sm text-neutral-400">
-                          {step.note}
+                    {/* STEP番号 + タイトル + 補足 + 期間目安 */}
+                    <div>
+                      <p className="text-base sm:text-lg">
+                        <span className="mr-2.5 font-extrabold tracking-wide text-brand-700 sm:mr-3">
+                          STEP{i + 1}
                         </span>
+                        <span className="font-bold text-neutral-800">
+                          {step.title}
+                        </span>
+                        {"note" in step && step.note && (
+                          <span className="text-sm text-neutral-400">
+                            {step.note}
+                          </span>
+                        )}
+                      </p>
+                      {"period" in step && step.period && (
+                        <p className="mt-1 pl-[calc(theme(space.10)+theme(space.2.5))] text-xs font-medium text-brand-400 sm:pl-[calc(theme(space.12)+theme(space.3))]">
+                          {step.period}
+                        </p>
                       )}
-                    </p>
+                    </div>
                   </div>
                 </Reveal>
 

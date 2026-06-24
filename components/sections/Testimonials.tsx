@@ -29,18 +29,12 @@ export default function Testimonials() {
                 <blockquote className="mt-2 flex-1 text-sm leading-relaxed text-neutral-700">
                   {t.comment}
                 </blockquote>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-neutral-100 pt-5">
-                  {/* アバター（仮：確定後に写真へ差し替え） */}
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-100 to-sky-100 text-xs text-brand-400">
-                    写真
+                <figcaption className="mt-6 border-t border-neutral-100 pt-5">
+                  <span className="block text-xs text-neutral-500">
+                    {t.industry}
                   </span>
-                  <span className="leading-tight">
-                    <span className="block text-xs text-neutral-500">
-                      {t.industry}
-                    </span>
-                    <span className="block text-sm font-bold text-neutral-900">
-                      {t.company}
-                    </span>
+                  <span className="mt-0.5 block text-sm font-bold text-neutral-900">
+                    {t.company}
                   </span>
                 </figcaption>
               </figure>

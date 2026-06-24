@@ -8,22 +8,37 @@ import type { NextConfig } from "next";
  * - script/style に 'unsafe-inline' を許可しているのは、Next の
  *   ハイドレーション用インラインスクリプトと、framer-motion / Leaflet が
  *   付与するインラインスタイルのため。
+ * - 'unsafe-eval' は開発時のみ許可。React（Turbopack）がデバッグ用途で
+ *   eval() を使用するため。本番ビルドでは React は eval() を使わないので除外。
  * - Google ドメインと reCAPTCHA は将来の実装に備えて許可済み。
  * - 地図タイル（CARTO）を img-src で許可。
  */
+const isDev = process.env.NODE_ENV === "development";
+
+const scriptSrc = [
+  "'self'",
+  "'unsafe-inline'",
+  // dev のみ: Turbopack / React DevTools が eval() を使用するため許可
+  ...(isDev ? ["'unsafe-eval'"] : []),
+  "https://www.google.com",
+  "https://www.gstatic.com",
+  "https://www.recaptcha.net",
+].join(" ");
+
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
   "form-action 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://www.recaptcha.net",
+  `script-src ${scriptSrc}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://*.basemaps.cartocdn.com https://*.cartocdn.com",
   "font-src 'self' data:",
   "connect-src 'self' https://www.google.com https://www.recaptcha.net",
   "frame-src https://www.google.com https://www.recaptcha.net",
-  "upgrade-insecure-requests",
+  // upgrade-insecure-requests は本番のみ有効（dev は http:// で動くため）
+  ...(!isDev ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
