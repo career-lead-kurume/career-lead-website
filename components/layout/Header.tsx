@@ -31,8 +31,8 @@ export default function Header() {
           <Image
             src="/images/logoK.png"
             alt="株式会社キャリア・リード"
-            width={180}
-            height={48}
+            width={800}
+            height={150}
             className="h-10 w-auto sm:h-12"
             priority
           />
@@ -93,8 +93,8 @@ export default function Header() {
                 <Image
                   src="/images/logoK.png"
                   alt="株式会社キャリア・リード"
-                  width={140}
-                  height={38}
+                  width={800}
+                  height={150}
                   className="h-8 w-auto"
                 />
                 <button

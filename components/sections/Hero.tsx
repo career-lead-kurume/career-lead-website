@@ -191,6 +191,7 @@ export default function Hero() {
               src="/images/hero-visual.png"
               alt="人材イラスト"
               fill
+              sizes="(min-width: 1024px) 36rem, 1px"
               className="object-contain object-bottom"
               priority
             />

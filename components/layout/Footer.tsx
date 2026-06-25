@@ -11,8 +11,8 @@ export default function Footer() {
             <Image
               src="/images/logoK.png"
               alt={site.company}
-              width={160}
-              height={44}
+              width={800}
+              height={150}
               className="h-10 w-auto brightness-0 invert"
             />
             <p className="mt-4 text-sm leading-relaxed text-neutral-400">
