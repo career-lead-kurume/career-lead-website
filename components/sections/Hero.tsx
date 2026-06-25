@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import CircleArrow from "@/components/ui/CircleArrow";
 import ImageMarquee from "@/components/ui/ImageMarquee";
@@ -184,18 +185,15 @@ export default function Hero() {
             </svg>
           </motion.div>
 
-          {/* ヒーロー動画 */}
-          <div className="absolute inset-x-[8%] bottom-0 top-[20%] overflow-hidden rounded-2xl shadow-lg">
-            <video
-              autoPlay
-              muted
-              playsInline
-              className="h-full w-full object-cover"
-            >
-              {/* TODO: クロスブラウザ対応のため .mp4 版も用意することを推奨 */}
-              <source src="/images/トップイラスト用.mov" type="video/quicktime" />
-              <source src="/images/トップイラスト用.mov" type="video/mp4" />
-            </video>
+          {/* ヒーロー画像 */}
+          <div className="absolute inset-x-[8%] bottom-0 top-[20%] overflow-hidden rounded-2xl">
+            <Image
+              src="/images/hero-2.png"
+              alt="人材イラスト"
+              fill
+              className="object-contain object-bottom"
+              priority
+            />
           </div>
 
         </motion.div>
