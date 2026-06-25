@@ -47,21 +47,13 @@ export default function Problem() {
             <Reveal key={item.title} delay={(i % 2) * 0.08}>
               <figure className="group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 via-cream-200 to-sky-100">
-                  {i < 3 ? (
-                    <Image
-                      src={`/images/problem/${String(i + 1).padStart(2, "0")}.jpg`}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 grid place-items-center text-brand-400/70 transition-transform duration-500 group-hover:scale-[1.04]">
-                      <span className="text-xs font-medium tracking-wide">
-                        画像（{String(i + 1).padStart(2, "0")}）
-                      </span>
-                    </div>
-                  )}
+                  <Image
+                    src={`/images/problem/${String(i + 1).padStart(2, "0")}.jpg`}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
                   {/* 連番バッジ */}
                   <span className="absolute left-4 top-4 font-mono text-sm font-semibold tabular-nums text-white/90 drop-shadow">
                     {String(i + 1).padStart(2, "0")}
