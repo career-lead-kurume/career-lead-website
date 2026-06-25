@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import CircleArrow from "@/components/ui/CircleArrow";
@@ -30,8 +29,6 @@ function SlashMarks({ flip = false }: { flip?: boolean }) {
 }
 
 export default function Hero() {
-  const [media, setMedia] = useState<"image" | "video">("image");
-
   return (
     <section
       id="top"
@@ -133,34 +130,13 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ===== 右: ビジュアル（地球＋人材。人材イラストは素材を配置） ===== */}
+        {/* ===== 右: ビジュアル（モバイル非表示） ===== */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative mx-auto aspect-square w-full max-w-xl"
+          className="relative mx-auto hidden aspect-square w-full max-w-xl lg:block"
         >
-          {/* 素材切替トグル（画像 / 動画を見比べる） */}
-          <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2">
-            <div className="inline-flex rounded-full border border-slate-200 bg-white/90 p-1 shadow-md backdrop-blur">
-              {(["image", "video"] as const).map((m) => (
-                <button
-                  key={m}
-                  type="button"
-                  onClick={() => setMedia(m)}
-                  aria-pressed={media === m}
-                  className={`rounded-full px-4 py-1.5 text-sm font-bold transition-colors ${
-                    media === m
-                      ? "bg-slate-800 text-white"
-                      : "text-slate-500 hover:text-slate-800"
-                  }`}
-                >
-                  {m === "image" ? "画像" : "動画"}
-                </button>
-              ))}
-            </div>
-          </div>
-
           {/* ラベンダーの水彩地球ブロブ */}
           <div
             className="absolute right-[4%] top-[3%] h-[86%] w-[86%] blur-md"
@@ -209,26 +185,15 @@ export default function Hero() {
             </svg>
           </motion.div>
 
-          {/* ヒーロービジュアル（画像 / 動画 切替） */}
+          {/* ヒーロー画像（透過PNG） */}
           <div className="absolute inset-x-[8%] bottom-0 top-[20%]">
-            {media === "image" ? (
-              <Image
-                src="/images/hero-visual.png"
-                alt="人材イラスト"
-                fill
-                className="object-contain object-bottom"
-                priority
-              />
-            ) : (
-              <video
-                src="/images/hero-visual.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="h-full w-full object-contain object-bottom"
-              />
-            )}
+            <Image
+              src="/images/hero-visual.png"
+              alt="人材イラスト"
+              fill
+              className="object-contain object-bottom"
+              priority
+            />
           </div>
 
         </motion.div>
