@@ -184,13 +184,18 @@ export default function Hero() {
             </svg>
           </motion.div>
 
-          {/* 人材イラスト（素材プレースホルダ） */}
-          <div className="absolute inset-x-[8%] bottom-0 top-[20%] grid place-items-center rounded-2xl border border-dashed border-slate-300/70 bg-white/30 backdrop-blur-[1px]">
-            <div className="text-center text-slate-400">
-              <div className="mx-auto mb-2 h-14 w-14 animate-float rounded-full bg-white/70 shadow" />
-              <p className="text-sm font-medium">人材イラスト</p>
-              <p className="mt-0.5 text-xs">（素材を /public/images に配置）</p>
-            </div>
+          {/* ヒーロー動画 */}
+          <div className="absolute inset-x-[8%] bottom-0 top-[20%] overflow-hidden rounded-2xl shadow-lg">
+            <video
+              autoPlay
+              muted
+              playsInline
+              className="h-full w-full object-cover"
+            >
+              {/* TODO: クロスブラウザ対応のため .mp4 版も用意することを推奨 */}
+              <source src="/images/トップイラスト用.mov" type="video/quicktime" />
+              <source src="/images/トップイラスト用.mov" type="video/mp4" />
+            </video>
           </div>
 
         </motion.div>
