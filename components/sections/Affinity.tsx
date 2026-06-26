@@ -62,7 +62,7 @@ export default function Affinity() {
 
           {affinity.signature && (
             <Reveal delay={0.4}>
-              <p className="mt-6 text-right text-sm font-medium text-white/70">
+              <p className="mt-6 whitespace-pre-line text-right text-sm font-medium text-white/70">
                 {affinity.signature}
               </p>
             </Reveal>
