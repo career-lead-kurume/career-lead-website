@@ -71,12 +71,21 @@ export const metadata: Metadata = {
     url: siteUrl,
     locale: "ja_JP",
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: site.company,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.company}｜特定技能外国人の採用・定着をワンストップ支援`,
     description:
       "特定技能外国人の採用から定着までワンストップで伴走。登録支援機関として人手不足の現場を支えます。",
+    images: ["/images/og-image.png"],
   },
   robots: {
     index: true,
