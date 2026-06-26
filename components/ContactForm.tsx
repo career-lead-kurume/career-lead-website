@@ -122,11 +122,13 @@ export default function ContactForm() {
           />
         </Field>
 
-        {state.status === "error" && (
-          <p className="rounded-lg bg-accent-50 px-4 py-3 text-sm text-accent-600">
-            {state.message}
-          </p>
-        )}
+        <div aria-live="assertive" role="alert">
+          {state.status === "error" && (
+            <p className="rounded-lg bg-accent-50 px-4 py-3 text-sm text-accent-600">
+              {state.message}
+            </p>
+          )}
+        </div>
 
         <button
           type="submit"

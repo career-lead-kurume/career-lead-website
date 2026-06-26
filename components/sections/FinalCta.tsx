@@ -62,7 +62,7 @@ export default function FinalCta() {
             {/* 右: オペレーター写真 */}
             <div className="relative h-52 w-full max-w-xs shrink-0 overflow-hidden rounded-2xl lg:h-60">
               <Image
-                src="/images/contact.jpeg"
+                src="/images/contact.webp"
                 alt="お問い合わせスタッフ"
                 fill
                 className="object-cover object-top"

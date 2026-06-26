@@ -12,6 +12,8 @@
  *   発生する。右マージンなら全幅の半分が正確に 1コピー分になり継ぎ目が消える。
  * - 両端は背景色へフェード
  */
+import Image from "next/image";
+
 type MarqueeImage = {
   src?: string;
   alt: string;
@@ -86,11 +88,12 @@ export default function ImageMarquee({
             className="relative mr-4 h-40 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:mr-6 sm:h-48 sm:w-80"
           >
             {img.src ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                className="h-full w-full object-cover"
+                fill
+                sizes="(min-width: 640px) 320px, 256px"
+                className="object-cover"
               />
             ) : (
               <Placeholder alt={img.alt} index={i} />

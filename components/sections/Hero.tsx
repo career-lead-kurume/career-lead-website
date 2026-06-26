@@ -51,12 +51,12 @@ export default function Hero() {
       {/* ===== 上部マーキー ===== */}
       <ImageMarquee
         images={[
-          { src: "/images/marquee/01.jpg", alt: "現場写真 1" },
-          { src: "/images/marquee/02.jpg", alt: "現場写真 2" },
-          { src: "/images/marquee/03.jpg", alt: "現場写真 3" },
-          { src: "/images/marquee/04.jpg", alt: "現場写真 4" },
-          { src: "/images/marquee/05.jpg", alt: "現場写真 5" },
-          { src: "/images/marquee/06.jpg", alt: "現場写真 6" },
+          { src: "/images/marquee/01.webp", alt: "現場写真 1" },
+          { src: "/images/marquee/02.webp", alt: "現場写真 2" },
+          { src: "/images/marquee/03.webp", alt: "現場写真 3" },
+          { src: "/images/marquee/04.webp", alt: "現場写真 4" },
+          { src: "/images/marquee/05.webp", alt: "現場写真 5" },
+          { src: "/images/marquee/06.webp", alt: "現場写真 6" },
         ]}
         durationS={35}
         fadeColor="#ffffff"

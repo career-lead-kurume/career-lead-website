@@ -27,7 +27,7 @@ export default function Affinity() {
         <Reveal direction="right">
           <div className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-[2.5rem] border border-white/20 shadow-2xl shadow-black/20 lg:mx-0">
             <Image
-              src="/images/representative.jpg"
+              src="/images/representative.webp"
               alt="株式会社キャリア・リード 代表取締役 佐藤有里子"
               fill
               className="object-cover"

@@ -48,7 +48,7 @@ export default function Problem() {
               <figure className="group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-brand-100 via-cream-200 to-sky-100">
                   <Image
-                    src={`/images/problem/${String(i + 1).padStart(2, "0")}.jpg`}
+                    src={`/images/problem/${String(i + 1).padStart(2, "0")}.webp`}
                     alt={item.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
