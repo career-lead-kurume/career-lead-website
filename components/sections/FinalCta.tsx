@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PhoneIcon } from "@heroicons/react/24/solid";
 import Reveal from "@/components/ui/Reveal";
 import CircleArrow from "@/components/ui/CircleArrow";
@@ -58,12 +59,15 @@ export default function FinalCta() {
               </div>
             </div>
 
-            {/* 右: ビジネスパーソンのイラスト（素材プレースホルダ） */}
-            <div className="grid h-40 w-full max-w-xs place-items-center rounded-2xl border border-dashed border-white/50 bg-white/15 backdrop-blur-[1px] lg:h-44">
-              <div className="text-center text-white/80">
-                <div className="mx-auto mb-2 h-12 w-12 rounded-full bg-white/30" />
-                <p className="text-xs font-medium">人物イラスト（素材）</p>
-              </div>
+            {/* 右: オペレーター写真 */}
+            <div className="relative h-52 w-full max-w-xs shrink-0 overflow-hidden rounded-2xl lg:h-60">
+              <Image
+                src="/images/contact.jpeg"
+                alt="お問い合わせスタッフ"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 320px, 320px"
+              />
             </div>
           </div>
         </div>

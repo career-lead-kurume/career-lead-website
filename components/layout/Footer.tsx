@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { navItems, site } from "@/lib/site";
 
 export default function Footer() {
@@ -28,12 +29,12 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
+                  <Link
+                    href={`/${item.href}`}
                     className="text-sm text-neutral-400 transition-colors hover:text-accent-300"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

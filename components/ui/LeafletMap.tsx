@@ -16,8 +16,8 @@ export type MapPin = {
   coord: [number, number];
 };
 
-/** 受け入れ先（日本）。各国からここへアークを伸ばす。 */
-const JAPAN: [number, number] = [35.6762, 139.6503];
+/** 受け入れ先（日本・福岡）。各国からここへアークを伸ばす。 */
+const JAPAN: [number, number] = [33.5902, 130.4017];
 
 /**
  * fitBounds の余白(px)。[x, y] = [左右, 上下]。

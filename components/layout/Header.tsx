@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -9,6 +11,11 @@ import { navItems, cta } from "@/lib/site";
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // トップページ以外からは /#section 形式でトップへ戻りながらスクロール
+  const navHref = (hash: string) =>
+    pathname === "/" ? hash : `/${hash}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -27,7 +34,7 @@ export default function Header() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-20 sm:px-6">
         {/* 会社ロゴ */}
-        <a href="#top" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <Image
             src="/images/logoK.png"
             alt="株式会社キャリア・リード"
@@ -36,25 +43,25 @@ export default function Header() {
             className="h-10 w-auto sm:h-12"
             priority
           />
-        </a>
+        </Link>
 
         {/* PC ナビ */}
         <nav className="hidden items-center gap-7 lg:flex">
           {navItems.slice(0, -1).map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
+              href={navHref(item.href)}
               className="text-sm font-medium text-neutral-700 transition-colors hover:text-brand-600"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
-          <a
+          <Link
             href={cta.contactHref}
             className="rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-600/20 transition-all hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-lg"
           >
             無料相談
-          </a>
+          </Link>
         </nav>
 
         {/* モバイル: ハンバーガー */}
@@ -108,23 +115,23 @@ export default function Header() {
               </div>
               <div className="flex flex-col gap-1">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
-                    href={item.href}
+                    href={navHref(item.href)}
                     onClick={() => setOpen(false)}
                     className="rounded-lg px-3 py-3 text-base font-medium text-neutral-700 transition-colors hover:bg-brand-50 hover:text-brand-600"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
-              <a
+              <Link
                 href={cta.contactHref}
                 onClick={() => setOpen(false)}
                 className="mt-6 rounded-full bg-brand-600 px-5 py-3 text-center text-sm font-semibold text-white"
               >
                 無料相談
-              </a>
+              </Link>
             </motion.nav>
           </motion.div>
         )}
