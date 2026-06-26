@@ -12,7 +12,7 @@ export const site = {
   tagline: "特定技能外国人採用を、もっとカンタンに。",
   tel: "0120-947-688",
   telHours: "受付時間 平日 9:00〜18:00",
-  email: "info@example.com",
+  email: "contact@career-lead.com",
   address: "〒830-0003 福岡県久留米市東櫛原町2303-16",
   // 構造化データ（JSON-LD）や表示で再利用する住所パーツ。
   // address 文字列とずれないよう、変更時は両方を更新すること。

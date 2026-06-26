@@ -188,12 +188,13 @@ export default function Hero() {
           {/* ヒーロー画像（透過PNG） */}
           <div className="absolute inset-x-[8%] bottom-0 top-[20%]">
             <Image
-              src="/images/hero-visual.png"
+              src="/images/hero-visual.webp"
               alt="人材イラスト"
               fill
               sizes="(min-width: 1024px) 36rem, 1px"
               className="object-contain object-bottom"
               priority
+              fetchPriority="high"
             />
           </div>
 
